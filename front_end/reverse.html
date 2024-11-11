@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      function reverse_number() {
+            const num1 = parseInt(document.getElementById("firstNum").value);
+            if (isNaN(num1)) {
+                document.getElementById("outputPara").innerHTML = "Please enter a valid number";
+                return;
+            }
+            const reversed = parseInt(num1.toString().split('').reverse().join('')) * Math.sign(num1);
+            document.getElementById("outputPara").innerHTML = "Reversed Number: " + reversed;
+        }
+    </script>
+    <link rel="stylesheet" href="bigof2.css">
+</head>
+
+<body>
+    <div id="data">
+        <label for="firstNum">Enter the number Number:</label>
+        <input type="text" id="firstNum">
+
+    </div>
+
+    <div>
+        <p id="outputPara" onclick="reverse_number()">Click Me to get the Answer</p>
+    </div>
+
+
+</body>
+
+</html>

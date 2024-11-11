@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script>
+    var cart = [];
+
+function findAmount() {
+  let qty = parseInt(document.getElementById("qty").value) || 0;
+  let price = parseInt(document.getElementById("price").value) || 0;
+  let amount = qty * price;
+  document.getElementById("amount").value = amount;
+}
+
+function addItem() {
+  let name = document.getElementById("name").value;
+  let qty = parseInt(document.getElementById("qty").value);
+  let price = parseInt(document.getElementById("price").value);
+  let amount = parseInt(document.getElementById("amount").value);
+
+  if (!name || !qty || !price || isNaN(amount)) {
+    alert("Please fill out all fields correctly.");
+    return;
+  }
+
+  let product = { name: name, qty: qty, price: price, amount: amount };
+  cart.push(product);
+
+  // Clear input fields
+  document.getElementById("name").value = "";
+  document.getElementById("qty").value = "";
+  document.getElementById("price").value = "";
+  document.getElementById("amount").value = "";
+
+  // Generate cart table
+  let cart_rows = cart.map(prod => `
+    <tr>
+      <td>${prod.name}</td>
+      <td>${prod.qty}</td>
+      <td>${prod.price}</td>
+      <td>${prod.amount}</td>
+    </tr>
+  `).join("");
+
+  let totalAmount = cart.reduce((sum, prod) => sum + prod.amount, 0);
+
+  let table = `
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${cart_rows}
+        <tr>
+          <th colspan="3">Total</th>
+          <th>${totalAmount}</th>
+        </tr>
+      </tbody>
+    </table>`;
+
+  document.getElementById("scart").innerHTML = table;
+}
+
+  </script>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2>Shopping Cart</h2>
+    
+    <div class="form-group">
+      <label for="name">Product Name:</label>
+      <input type="text" id="name" class="form-control" placeholder="Enter product name">
+    </div>
+
+    <div class="form-group">
+      <label for="qty">Quantity:</label>
+      <input type="number" id="qty" class="form-control" placeholder="Enter quantity" oninput="findAmount()">
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input type="number" id="price" class="form-control" placeholder="Enter price" oninput="findAmount()">
+    </div>
+
+    <div class="form-group">
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" class="form-control" placeholder="Total amount" readonly>
+    </div>
+
+    <button class="btn btn-primary" onclick="addItem()">Add to Cart</button>
+
+    <div id="scart" class="mt-5"></div>
+  </div>
+
+  <script src="cart.js"></script>
+</body>
+</html>

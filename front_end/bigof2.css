@@ -1,0 +1,29 @@
+p {
+    background-color: blueviolet;
+    color: aquamarine;
+    font-weight: bold;
+    border-radius: 10px;
+    border: solid 2px grey;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  input[type="text"] {
+    display: block;
+    margin-top: 5px;
+    padding: 5px;
+  }
+  
+  .button {
+    margin-top: 10px;
+    border: 1px solid brown;
+    background-color: bisque;
+    font-weight: bold;
+  }
+  
